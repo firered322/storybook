@@ -10,15 +10,19 @@ connectDB();
 
 const app = express();
 
+// Set EJS
 app.set("view engine", "ejs");
 
+app.use(express.static(require("path").join(__dirname, "public")));
+
+// Logging
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.get("/", (req, res) => {
-  res.render("pages/index");
-});
+// Routes
+app.use("/", require("./routes/index"));
+////////////////////////// Setup initialisation /////////////////////////////////
 
 const PORT = process.env.PORT || 5000;
 
