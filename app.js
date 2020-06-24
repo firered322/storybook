@@ -1,4 +1,5 @@
 const express = require("express");
+
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const passport = require("passport");
@@ -17,6 +18,7 @@ const app = express();
 
 // Set EJS
 app.set("view engine", "ejs");
+app.set("views", require("path").join(__dirname, "views"));
 
 // Express-sessions init
 app.use(
