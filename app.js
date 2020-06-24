@@ -1,9 +1,10 @@
 const express = require("express");
-
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 
 // Load config
@@ -26,6 +27,7 @@ app.use(
     secret: "keyboard cat",
     resave: false, // dont save session when nothing is modified
     saveUninitialized: false, // dont create session until something is stored
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
 
