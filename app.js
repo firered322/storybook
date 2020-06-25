@@ -17,6 +17,10 @@ connectDB();
 
 const app = express();
 
+// Body parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Set EJS
 app.set("view engine", "ejs");
 app.set("views", require("path").join(__dirname, "views"));

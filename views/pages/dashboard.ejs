@@ -17,13 +17,12 @@
             <th>Title</th>
             <th>Date</th>
             <th>Status</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           <% stories.forEach(story => { %>
           <tr>
-            <td><a href="/stories/<%= story._id %>"></a></td>
+            <td><a href="/stories/<%= story.title %>"></a></td>
             <td><%= story.createdAt %></td>
             <td><%= story.status %></td>
           </tr>
