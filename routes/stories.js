@@ -3,7 +3,6 @@ const router = express.Router();
 const { verifyAuthenticated } = require("../middleware/auth");
 
 const Story = require("../models/Story");
-const { response } = require("express");
 
 // @desc Story add page
 // @route GET /stories
@@ -17,7 +16,7 @@ router.post("/", verifyAuthenticated, async (req, res) => {
   try {
     // add the user to the req.body field where the form data is stored
     req.body.user = req.user.id;
-    await Story.create(req.body);
+    const story = await Story.create(req.body);
     res.redirect("/dashboard");
   } catch (err) {
     console.error(err);

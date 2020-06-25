@@ -22,7 +22,9 @@
         <tbody>
           <% stories.forEach(story => { %>
           <tr>
-            <td><a href="/stories/<%= story.title %>"></a></td>
+            <td>
+              <a href="/stories/<%= story.title %>"><%= story.title %></a>
+            </td>
             <td><%= story.createdAt %></td>
             <td><%= story.status %></td>
           </tr>

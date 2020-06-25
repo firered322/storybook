@@ -20,7 +20,7 @@ module.exports = function (passport) {
 
         try {
           // find if a user exists
-          let user = await User.findOne({ googleID: profile.id });
+          let user = await User.findOne({ googleId: profile.id });
           if (user) {
             done(null, user);
           } else {
