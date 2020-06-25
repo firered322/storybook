@@ -46,6 +46,7 @@ if (process.env.NODE_ENV === "development") {
 // Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
+app.use("/stories", require("./routes/stories"));
 ////////////////////////// Setup initialisation /////////////////////////////////
 
 const PORT = process.env.PORT || 5000;

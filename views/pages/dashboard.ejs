@@ -4,13 +4,32 @@
     <%- include('../partials/head.ejs') %>
   </head>
   <body>
-    <%- include('../partials/header.ejs') %>
+    <%- include('../partials/header.ejs') %> <%-
+    include('../partials/add_button.ejs') %>
     <div class="container">
       <h6>Dashboard</h6>
       <h3>Hi <%= name %></h3>
       <h6>Here are your stories</h6>
       <% if (stories.length != 0) { %>
-      <h1>story</h1>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% stories.forEach(story => { %>
+          <tr>
+            <td><a href="/stories/<%= story._id %>"></a></td>
+            <td><%= story.createdAt %></td>
+            <td><%= story.status %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
       <% } else { %>
       <p>You haven't created any stories</p>
       <% } %>
