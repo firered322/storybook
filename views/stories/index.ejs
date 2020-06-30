@@ -9,31 +9,33 @@
     </header>
     <div class="container">
       <h1>Stories</h1>
-      <% if (stories) { %> <% stories.forEach(story => { %>
-      <div class="col s12 m4">
-        <div class="card">
-          <div class="card-image">
-            <!-- TODO: editIcon -->
-          </div>
-          <div class="card-content center-align">
-            <h5><%= story.title %></h5>
-            <p><%= story.body %></p>
-            <br />
-            <div class="chip">
-              <img src="<%= story.user.image %>" alt="" />
-              <a href="/stories/user/<%= story.user._id %>"
-                ><%= story.user.displayName %>
-              </a>
+      <div class="row">
+        <% if (stories) { %> <% stories.forEach(story => { %>
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <%- story.editBody %>
+            </div>
+            <div class="card-content center-align">
+              <h5><%= story.title %></h5>
+              <p><%= story.body %></p>
+              <br />
+              <div class="chip">
+                <img src="<%= story.user.image %>" alt="" />
+                <a href="/stories/user/<%= story.user._id %>"
+                  ><%= story.user.displayName %>
+                </a>
+              </div>
+            </div>
+            <div class="card-action center-align">
+              <a href="/stories/<%= story._id %>" class="btn grey">Read More</a>
             </div>
           </div>
-          <div class="card-action center-align">
-            <a href="/stories/<%= story._id %>" class="btn grey">Read More</a>
-          </div>
         </div>
+        <% }) %> <% } else { %>
+        <p>No stories to display</p>
+        <% } %>
       </div>
-      <% }) %> <% } else { %>
-      <p>No stories to display</p>
-      <% } %>
     </div>
 
     <%- include('../partials/footer.ejs') %>

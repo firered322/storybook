@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { verifyAuthenticated } = require("../middleware/auth");
+const { truncate, stripTags, editIcon } = require("../helpers/helper");
 
 const Story = require("../models/Story");
 
@@ -10,7 +11,7 @@ router.get("/add", verifyAuthenticated, (req, res) => {
   res.render("stories/add");
 });
 
-// @desc process add form
+// @desc process add story form
 // @route POST /stories
 router.post("/", verifyAuthenticated, async (req, res) => {
   try {
@@ -34,6 +35,13 @@ router.get("/", verifyAuthenticated, async (req, res) => {
         createdAt: "desc",
       })
       .lean();
+
+    stories.forEach((story) => {
+      story.body = truncate(stripTags(story.body), 20);
+      // story's user: story.user
+      // logged in user: req.user
+      story.editBody = editIcon(story.user, req.user, story._id);
+    });
     res.render("stories/index", { stories });
   } catch (err) {
     console.error(err);
