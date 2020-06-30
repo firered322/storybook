@@ -17,16 +17,34 @@
             <th>Title</th>
             <th>Date</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% stories.forEach(story => { %>
           <tr>
             <td>
-              <a href="/stories/<%= story.title %>"><%= story.title %></a>
+              <a href="/stories/<%= story._id %>"><%= story.title %></a>
             </td>
             <td><%= story.createdAt %></td>
-            <td><%= story.status %></td>
+            <td><span class="dash-status"><%= story.status %></span></td>
+            <td>
+              <a
+                href="/stories/edit/<%= story._id %> "
+                class="btn btn-float blue darken-3"
+                >Edit</a
+              >
+              <form
+                action="/stories/<%= story.id %>"
+                method="POST"
+                id="delete_form"
+              >
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit" class="btn red">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
           </tr>
           <% }) %>
         </tbody>
