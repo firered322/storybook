@@ -49,6 +49,22 @@ router.get("/", verifyAuthenticated, async (req, res) => {
   }
 });
 
+// @desc SHow single story
+// @route GET /stories/:id
+router.get("/:id", verifyAuthenticated, async (req, res) => {
+  try {
+    let story = await Story.findById(req.params.id).populate("user").lean();
+    console.log(story);
+    if (!story) {
+      return res.render("error/404");
+    }
+    res.render("stories/story", { story });
+  } catch (err) {
+    console.error(err);
+    res.render("error/404");
+  }
+});
+
 // @desc Story edit page
 // @route GET /stories/edit/:id
 router.get("/edit/:id", verifyAuthenticated, async (req, res) => {
